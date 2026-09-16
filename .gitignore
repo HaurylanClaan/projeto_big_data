@@ -1,0 +1,18 @@
+# Ambientes Virtuais
+.venv/
+venv/
+env/
+
+# Dados e Bases Pesadas (Enviados via GitHub Releases)
+data_base_6meses/
+*.csv
+*.zip
+
+# Arquivos de Cache e Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Arquivos de Sistema Operacional
+.DS_Store
+Thumbs.db
