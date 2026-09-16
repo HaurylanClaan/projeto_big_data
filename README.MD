@@ -12,8 +12,6 @@ Este repositório contém a estrutura de scripts e a documentação do projeto d
 Para evitar sobrecarga no repositório, o dataset contendo os 6 meses de logs de alta severidade (cerca de 178 arquivos) foi compactado.
 👉 **Acesse a aba [Releases](../../releases) deste repositório para baixar a base de dados.**
 
-> **Nota de Privacidade:** Todos os dados internos (Nomes de Usuários, Hosts e IPs da rede local) foram estritamente anonimizados via Hash. IPs de atacantes externos foram preservados para análise de *Threat Intelligence*.
-
 ## 📂 Estrutura do Repositório
 * `/scripts`: Códigos em Python utilizados para limpeza, anonimização e concatenação da base de dados.
 * `README.md`: Documentação principal do projeto.
