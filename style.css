@@ -1,0 +1,1367 @@
+
+:root {
+    color-scheme: dark;
+
+    --bg: #060812;
+    --cd: rgba(22, 30, 66, 0.46);
+    --bd: rgba(130, 160, 255, 0.15);
+    --lt: rgba(110, 150, 255, 0.5);
+
+    --tx: #eaf0ff;
+    --t2: #aab7dd;
+    --mu: #6e7ca6;
+
+    --p: #4f8cff;
+    --c: #22d3ee;
+    --v: #8b5cf6;
+    --g: #34d399;
+    --a: #fbbf24;
+    --r: #fb7185;
+
+    --s: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--s);
+    color: var(--tx);
+    background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(
+            1100px 650px at 78% -10%,
+            rgba(99, 102, 241, 0.32),
+            transparent 60%
+        ),
+        radial-gradient(
+            900px 600px at 5% 105%,
+            rgba(37, 99, 235, 0.22),
+            transparent 60%
+        ),
+        radial-gradient(
+            700px 500px at 100% 90%,
+            rgba(139, 92, 246, 0.14),
+            transparent 60%
+        ),
+        linear-gradient(
+            rgba(130, 160, 255, 0.03) 1px,
+            transparent 1px
+        ) 0 0 / 100% 40px,
+        linear-gradient(
+            90deg,
+            rgba(130, 160, 255, 0.03) 1px,
+            transparent 1px
+        ) 0 0 / 40px 100%;
+}
+
+.ic {
+    width: 1.2em;
+    height: 1.2em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: none;
+}
+
+/* =========================================================
+   APP / LAYOUT
+   ========================================================= */
+
+.app {
+    display: grid;
+    grid-template-columns: 262px minmax(0, 1fr);
+    gap: 18px;
+    padding: 16px;
+    min-height: 100vh;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sb {
+    position: sticky;
+    top: 16px;
+    height: calc(100vh - 32px);
+    display: flex;
+    flex-direction: column;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(24, 32, 72, 0.62),
+            rgba(10, 14, 34, 0.7)
+        );
+    border: 1px solid var(--bd);
+    border-radius: 22px;
+    padding: 20px 14px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 30px 70px -40px #000;
+}
+
+.lg {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 2px 8px 18px;
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+}
+
+.lg .lo {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    background: linear-gradient(140deg, #3b82f6, #8b5cf6);
+    box-shadow: 0 0 24px rgba(79, 140, 255, 0.55);
+}
+
+.gl {
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mu);
+    margin: 16px 10px 6px;
+}
+
+.nv {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    padding: 10px 12px;
+    margin: 2px 0;
+    border-radius: 12px;
+    font-size: 13.5px;
+    color: var(--t2);
+    cursor: pointer;
+    transition: 0.18s;
+}
+
+.nv:hover {
+    background: rgba(130, 160, 255, 0.09);
+    color: #fff;
+}
+
+.nv.on {
+    color: #fff;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(37, 99, 235, 0.95),
+            rgba(59, 130, 246, 0.55)
+        );
+    box-shadow:
+        0 8px 24px -10px rgba(59, 130, 246, 0.8),
+        0 0 0 1px rgba(147, 180, 255, 0.35) inset;
+}
+
+.nv:focus-visible,
+.pill:focus-visible,
+[data-k]:focus-visible,
+#q:focus-visible {
+    outline: 2px solid var(--a);
+    outline-offset: 2px;
+}
+
+.us {
+    margin-top: auto;
+    display: flex;
+    gap: 11px;
+    align-items: center;
+    padding: 12px;
+    border-radius: 14px;
+    background: rgba(130, 160, 255, 0.07);
+    border: 1px solid var(--bd);
+}
+
+.us .av {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(140deg, var(--c), var(--v));
+    color: #05101f;
+    font-weight: 800;
+}
+
+.us b {
+    display: block;
+    font-size: 13px;
+}
+
+.us small {
+    color: var(--mu);
+    font-size: 11.5px;
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.mn {
+    min-width: 0;
+    padding: 6px 6px 60px;
+}
+
+.hd {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.hd h1 {
+    margin: 0;
+    font-size: 27px;
+    letter-spacing: -0.02em;
+}
+
+.hd p {
+    margin: 2px 0 0;
+    color: var(--t2);
+    font-size: 13.5px;
+}
+
+.hd .sp {
+    flex: 1;
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.srch {
+    position: relative;
+    width: min(330px, 100%);
+}
+
+.srch .ic {
+    position: absolute;
+    left: 13px;
+    top: 12px;
+    color: var(--mu);
+}
+
+#q {
+    width: 100%;
+    padding: 11px 44px 11px 40px;
+    border-radius: 13px;
+    border: 1px solid var(--bd);
+    background: rgba(22, 30, 66, 0.5);
+    color: var(--tx);
+    font: inherit;
+    font-size: 13.5px;
+}
+
+#q::placeholder {
+    color: var(--mu);
+}
+
+.srch kbd {
+    position: absolute;
+    right: 11px;
+    top: 9px;
+    font: 11px var(--s);
+    color: var(--mu);
+    border: 1px solid var(--bd);
+    border-radius: 6px;
+    padding: 2px 7px;
+}
+
+#qr {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    background: rgba(10, 14, 36, 0.98);
+    border: 1px solid var(--lt);
+    border-radius: 13px;
+    overflow: hidden;
+    display: none;
+}
+
+#qr button {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--t2);
+}
+
+#qr button:hover,
+#qr button:focus-visible {
+    background: rgba(79, 140, 255, 0.18);
+    color: #fff;
+}
+
+#qr small {
+    margin-left: auto;
+    color: var(--mu);
+}
+
+.pill {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 15px;
+    border-radius: 13px;
+    border: 1px solid var(--bd);
+    background: rgba(22, 30, 66, 0.5);
+    font-size: 13px;
+    color: var(--t2);
+}
+
+/* =========================================================
+   TOGGLE
+   ========================================================= */
+
+.tg {
+    display: flex;
+    padding: 3px;
+    border-radius: 13px;
+    border: 1px solid var(--bd);
+    background: rgba(22, 30, 66, 0.5);
+}
+
+.tg button {
+    all: unset;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    color: var(--t2);
+    transition: 0.18s;
+}
+
+.tg button:hover {
+    color: #fff;
+}
+
+.tg button.on {
+    background: linear-gradient(90deg, #2563eb, #4f8cff);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 6px 18px -8px #3b82f6;
+}
+
+.tg button:focus-visible {
+    outline: 2px solid var(--a);
+}
+
+/* =========================================================
+   VIEWS / GRID
+   ========================================================= */
+
+.view {
+    display: none;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.view.on {
+    display: grid;
+    animation: fi 0.35s ease;
+}
+
+@keyframes fi {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+}
+
+.s3 {
+    grid-column: span 3;
+}
+
+.s4 {
+    grid-column: span 4;
+}
+
+.s5 {
+    grid-column: span 5;
+}
+
+.s6 {
+    grid-column: span 6;
+}
+
+.s7 {
+    grid-column: span 7;
+}
+
+.s8 {
+    grid-column: span 8;
+}
+
+.s12 {
+    grid-column: span 12;
+}
+
+/* =========================================================
+   RESPONSIVE GRID
+   ========================================================= */
+
+@media (max-width: 1180px) {
+    .s3,
+    .s4,
+    .s5,
+    .s6,
+    .s7,
+    .s8 {
+        grid-column: span 12;
+    }
+
+    .kp .s3 {
+        grid-column: span 6;
+    }
+}
+
+@media (max-width: 900px) {
+    .app {
+        grid-template-columns: 1fr;
+    }
+
+    .sb {
+        position: static;
+        height: auto;
+    }
+
+    .us {
+        display: none;
+    }
+
+    .kp .s3 {
+        grid-column: span 12;
+    }
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card {
+    position: relative;
+    background: var(--cd);
+    border: 1px solid var(--bd);
+    border-radius: 20px;
+    padding: 20px 22px;
+    backdrop-filter: blur(18px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.06) inset,
+        0 24px 50px -30px #000;
+    min-width: 0;
+    transition:
+        border-color 0.25s,
+        transform 0.25s;
+}
+
+.card:hover {
+    border-color: var(--lt);
+}
+
+.ch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.ch .ic {
+    color: var(--p);
+    font-size: 19px;
+}
+
+h2 {
+    margin: 0;
+    font-size: 15.5px;
+    font-weight: 620;
+}
+
+.hint {
+    margin-left: auto;
+    font-size: 11.5px;
+    color: var(--mu);
+}
+
+/* =========================================================
+   KPI CARDS
+   ========================================================= */
+
+.kc {
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.kc:hover {
+    transform: translateY(-3px);
+}
+
+.kt {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: var(--t2);
+    font-size: 13.5px;
+}
+
+.kb {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 19px;
+    border: 1px solid;
+}
+
+.kv {
+    font-size: 31px;
+    font-weight: 700;
+    margin: 2px 0 4px;
+    font-variant-numeric: tabular-nums;
+}
+
+.kn {
+    font-size: 12px;
+    color: var(--t2);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.kn i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+/* =========================================================
+   LEGENDS
+   ========================================================= */
+
+.lei {
+    font-size: 13px;
+    color: var(--t2);
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 1px solid var(--bd);
+    line-height: 1.6;
+}
+
+.lei b {
+    color: #fff;
+}
+
+.lei i {
+    font-style: normal;
+    color: var(--p);
+    font-weight: 700;
+    margin-right: 7px;
+}
+
+/* =========================================================
+   ALERT
+   ========================================================= */
+
+.al {
+    display: flex;
+    gap: 12px;
+    border: 1px solid rgba(251, 113, 133, 0.4);
+    background: rgba(251, 113, 133, 0.08);
+    border-radius: 16px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    font-size: 13.5px;
+    color: #ffd6dd;
+}
+
+.al .ic {
+    color: var(--r);
+    margin-top: 3px;
+}
+
+.al b {
+    color: #fff;
+}
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--mu);
+    font-size: 12px;
+    padding: 8px 6px;
+    border-bottom: 1px solid var(--bd);
+}
+
+td {
+    padding: 10px 6px;
+    border-bottom: 1px solid rgba(130, 160, 255, 0.07);
+}
+
+tr:hover td {
+    background: rgba(130, 160, 255, 0.06);
+}
+
+td.n {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+
+.pb {
+    height: 6px;
+    border-radius: 9px;
+    background: rgba(130, 160, 255, 0.14);
+    min-width: 90px;
+}
+
+.pb i {
+    display: block;
+    height: 100%;
+    border-radius: 9px;
+    background: linear-gradient(90deg, var(--p), var(--c));
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.ac {
+    display: flex;
+    gap: 13px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(130, 160, 255, 0.08);
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.ac:last-child {
+    border: 0;
+}
+
+.ac:hover {
+    background: rgba(130, 160, 255, 0.06);
+}
+
+.ac .kb {
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
+}
+
+.ac b {
+    font-size: 14px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.ac p {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    color: var(--t2);
+}
+
+.ac p strong {
+    color: #fff;
+}
+
+.tag {
+    font: 600 10.5px var(--s);
+    padding: 2px 9px;
+    border-radius: 99px;
+    border: 1px solid currentColor;
+}
+
+/* =========================================================
+   DONUT / DATA LEGENDS
+   ========================================================= */
+
+.dg {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+.dg svg {
+    width: 190px;
+    flex: none;
+}
+
+.dl {
+    flex: 1;
+    min-width: 170px;
+}
+
+.dl button {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    cursor: pointer;
+}
+
+.dl button:hover,
+.dl button:focus-visible {
+    background: rgba(130, 160, 255, 0.1);
+}
+
+.dl i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dl em {
+    margin-left: auto;
+    font-style: normal;
+    color: var(--t2);
+    font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================
+   SVG / CHARTS
+   ========================================================= */
+
+svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+svg .t {
+    fill: #aab7dd;
+    font: 11.5px var(--s);
+}
+
+svg .v {
+    fill: #fff;
+    font: 600 11.5px var(--s);
+}
+
+svg .ax {
+    stroke: rgba(130, 160, 255, 0.12);
+}
+
+svg .big {
+    fill: #fff;
+    font: 700 20px var(--s);
+}
+
+[data-k] {
+    cursor: pointer;
+}
+
+[data-k]:hover rect.b {
+    filter: brightness(1.3) drop-shadow(0 0 7px currentColor);
+}
+
+[data-k]:hover .t {
+    fill: #fff;
+}
+
+.hit {
+    fill: transparent;
+}
+
+.hit:hover {
+    fill: rgba(79, 140, 255, 0.13);
+}
+
+circle.sg {
+    transition: 0.15s;
+    cursor: pointer;
+}
+
+circle.sg:hover {
+    stroke-width: 25;
+    filter: brightness(1.25);
+}
+
+.bub {
+    transition: 0.15s;
+}
+
+.bub:hover {
+    stroke: #fff;
+    stroke-width: 1.5;
+}
+
+@keyframes pl {
+    0% {
+        r: var(--r0);
+        opacity: 0.55;
+    }
+
+    100% {
+        r: calc(var(--r0) * 2.2);
+        opacity: 0;
+    }
+}
+
+.pu {
+    animation: pl 2.6s ease-out infinite;
+    pointer-events: none;
+}
+
+/* =========================================================
+   TOOLTIP
+   ========================================================= */
+
+#tip {
+    position: fixed;
+    z-index: 60;
+    pointer-events: none;
+    background: rgba(8, 12, 32, 0.97);
+    border: 1px solid var(--lt);
+    border-radius: 12px;
+    padding: 9px 13px;
+    font-size: 12.5px;
+    max-width: 300px;
+    opacity: 0;
+    transition: opacity 0.12s;
+    box-shadow: 0 14px 34px -12px #000;
+}
+
+#tip b {
+    color: var(--c);
+}
+
+#tip small {
+    color: var(--mu);
+    display: block;
+    margin-top: 2px;
+}
+
+/* =========================================================
+   DETAIL DRAWER
+   ========================================================= */
+
+#dr {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(450px, 100vw);
+    z-index: 50;
+    background: rgba(8, 12, 32, 0.97);
+    backdrop-filter: blur(24px);
+    border-left: 1px solid var(--lt);
+    padding: 24px;
+    transform: translateX(105%);
+    transition: transform 0.3s cubic-bezier(0.22, 0.7, 0.3, 1);
+    overflow: auto;
+}
+
+#dr.on {
+    transform: none;
+}
+
+#dr .x {
+    all: unset;
+    cursor: pointer;
+    float: right;
+    padding: 6px;
+    border-radius: 9px;
+    color: var(--t2);
+}
+
+#dr .x:hover {
+    color: #fff;
+    background: rgba(130, 160, 255, 0.14);
+}
+
+#dr h3 {
+    margin: 0 0 2px;
+    font-size: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#dr h3 .ic {
+    color: var(--p);
+}
+
+#dr .sb2 {
+    color: var(--mu);
+    font-size: 12.5px;
+    margin-bottom: 16px;
+}
+
+#dr h4 {
+    margin: 20px 0 6px;
+    font-size: 11.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--mu);
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .pu,
+    .view.on {
+        animation: none;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* =========================================================
+   KPI GRID
+   ========================================================= */
+
+.kg {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* =========================================================
+   FILTER CHIPS
+   ========================================================= */
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chp {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 99px;
+    border: 1px solid var(--bd);
+    background: rgba(22, 30, 66, 0.4);
+    font-size: 12.5px;
+    color: var(--t2);
+}
+
+.chp b {
+    color: #fff;
+    font-size: 14px;
+}
+
+.chp .ic {
+    color: var(--p);
+}
+
+/* =========================================================
+   ACTION GRID
+   ========================================================= */
+
+.acg {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.acg .ac {
+    padding: 14px;
+    border: 1px solid var(--bd);
+    border-radius: 14px;
+    border-left: 3px solid var(--r);
+}
+
+.acg .ac:nth-child(2) {
+    border-left-color: var(--a);
+}
+
+.acg .ac:nth-child(3) {
+    border-left-color: var(--c);
+}
+
+/* =========================================================
+   DATE PICKER
+   ========================================================= */
+
+.dpw {
+    position: relative;
+}
+
+#dp {
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    color: var(--tx);
+}
+
+#dp:hover {
+    border-color: var(--lt);
+}
+
+#pop {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 52px;
+    z-index: 40;
+    width: 330px;
+    background: rgba(10, 14, 36, 0.98);
+    border: 1px solid var(--lt);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 24px 60px -20px #000;
+}
+
+#pop.on {
+    display: block;
+}
+
+.pt {
+    font-size: 11.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--mu);
+    margin-bottom: 10px;
+}
+
+#pr {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 14px;
+}
+
+#pr button {
+    all: unset;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 99px;
+    border: 1px solid var(--bd);
+    font-size: 12.5px;
+    color: var(--t2);
+}
+
+#pr button:hover {
+    border-color: var(--lt);
+    color: #fff;
+}
+
+#pr button.on {
+    background: linear-gradient(90deg, #2563eb, #4f8cff);
+    color: #fff;
+    border-color: transparent;
+}
+
+#pr button:focus-visible,
+.ap:focus-visible {
+    outline: 2px solid var(--a);
+}
+
+/* =========================================================
+   DATE RANGE
+   ========================================================= */
+
+.dr2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.dr2 label {
+    font-size: 11.5px;
+    color: var(--mu);
+    display: grid;
+    gap: 4px;
+}
+
+.dr2 input {
+    background: rgba(22, 30, 66, 0.7);
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    color: var(--tx);
+    padding: 8px 10px;
+    font: inherit;
+    font-size: 13px;
+    color-scheme: dark;
+}
+
+/* =========================================================
+   APPLY BUTTON
+   ========================================================= */
+
+.ap {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 11px;
+    background: linear-gradient(90deg, #2563eb, #4f8cff);
+    font-weight: 600;
+    font-size: 13.5px;
+}
+
+.ap:hover {
+    filter: brightness(1.15);
+}
+
+#dr .go {
+    all: unset;
+    cursor: pointer;
+    margin-top: 14px;
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--lt);
+    font-size: 13px;
+    color: var(--c);
+}
+
+#dr .go:hover {
+    background: rgba(79, 140, 255, 0.15);
+}
+
+/* =========================================================
+   TOOLBAR / FILTERS
+   ========================================================= */
+
+.tb2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    border: 1px solid var(--bd);
+    background: rgba(22, 30, 66, 0.4);
+}
+
+.tb2 .sp {
+    flex: 1;
+}
+
+.rg {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--t2);
+    font-size: 12.5px;
+}
+
+.rg .ic {
+    color: var(--p);
+}
+
+input[type="date"] {
+    background: rgba(10, 14, 36, 0.7);
+    color: var(--tx);
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    padding: 7px 10px;
+    font: inherit;
+    font-size: 13px;
+    color-scheme: dark;
+}
+
+input[type="date"]:focus-visible {
+    outline: 2px solid var(--a);
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.chips button {
+    all: unset;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 99px;
+    font-size: 12.5px;
+    color: var(--t2);
+    border: 1px solid var(--bd);
+    transition: 0.18s;
+}
+
+.chips button:hover {
+    color: #fff;
+    border-color: var(--lt);
+}
+
+.chips button.on {
+    background: rgba(79, 140, 255, 0.22);
+    border-color: var(--p);
+    color: #fff;
+}
+
+.chips button:focus-visible {
+    outline: 2px solid var(--a);
+}
+
+.rb {
+    font-size: 12.5px;
+    color: var(--mu);
+}
+
+.rb b {
+    color: var(--c);
+}
+
+.rs {
+    all: unset;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--a);
+    padding: 6px 10px;
+    border-radius: 10px;
+}
+
+.rs:hover {
+    background: rgba(251, 191, 36, 0.1);
+}
+
+.rs.on {
+    display: flex;
+}
+
+/* =========================================================
+   MISC / EMPTY STATES
+   ========================================================= */
+
+.vz {
+    color: var(--mu);
+    font-size: 13px;
+    padding: 26px 6px;
+    text-align: center;
+}
+
+tr[data-k] {
+    cursor: pointer;
+}
+
+#dr .bk {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--c);
+    margin-bottom: 12px;
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+#dr .bk:hover {
+    background: rgba(34, 211, 238, 0.1);
+}
+
+#c2b {
+    margin-top: 10px;
+}
+
+.brz {
+    fill: rgba(79, 140, 255, 0.25);
+    stroke: var(--p);
+    stroke-width: 1;
+}
+
+/* =========================================================
+   ACTION PANEL
+   ========================================================= */
+
+#act {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 14px;
+}
+
+#act .ac {
+    border: 1px solid var(--bd);
+    border-radius: 14px;
+    padding: 14px;
+    background: rgba(130, 160, 255, 0.04);
+}
+
+#act .ac:hover {
+    border-color: var(--lt);
+}
+
+.vz b {
+    color: var(--c);
+}
+
+.lk {
+    all: unset;
+    cursor: pointer;
+    margin-top: 12px;
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 99px;
+    font-size: 12.5px;
+    color: #fff;
+    background: linear-gradient(90deg, #2563eb, #4f8cff);
+}
+
+.lk:hover {
+    filter: brightness(1.15);
+}
+
+.lk:focus-visible {
+    outline: 2px solid var(--a);
+}

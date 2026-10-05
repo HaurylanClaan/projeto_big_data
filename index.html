@@ -1,0 +1,543 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SecOps · Projeto Big Data</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <symbol id="i-sh" viewBox="0 0 24 24">
+                <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>
+            </symbol>
+
+            <symbol id="i-li" viewBox="0 0 24 24">
+                <path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>
+            </symbol>
+
+            <symbol id="i-ba" viewBox="0 0 24 24">
+                <path d="M4 20v-6M10 20V4M16 20V9M22 20v-3"/>
+            </symbol>
+
+            <symbol id="i-ac" viewBox="0 0 24 24">
+                <path d="M3 12h4l3-8 4 16 3-8h4"/>
+            </symbol>
+
+            <symbol id="i-gl" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>
+            </symbol>
+
+            <symbol id="i-ta" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8"/>
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v3M12 20v3M1 12h3M20 12h3"/>
+            </symbol>
+
+            <symbol id="i-gr" viewBox="0 0 24 24">
+                <path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/>
+            </symbol>
+
+            <symbol id="i-sv" viewBox="0 0 24 24">
+                <path d="M4 5h16v5H4zM4 14h16v5H4zM7 7.5h.01M7 16.5h.01"/>
+            </symbol>
+
+            <symbol id="i-us" viewBox="0 0 24 24">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>
+            </symbol>
+
+            <symbol id="i-bg" viewBox="0 0 24 24">
+                <path d="M9 9h6v8a3 3 0 0 1-6 0zM12 9V5M9 6L7 4M15 6l2-2M5 12h4M15 12h4M5 18l4-1M19 18l-4-1"/>
+            </symbol>
+
+            <symbol id="i-mo" viewBox="0 0 24 24">
+                <path d="M3 4h18v13H3zM8 21h8M12 17v4"/>
+            </symbol>
+
+            <symbol id="i-al" viewBox="0 0 24 24">
+                <path d="M12 3l10 18H2zM12 10v5M12 18h.01"/>
+            </symbol>
+
+            <symbol id="i-x" viewBox="0 0 24 24">
+                <path d="M6 6l12 12M18 6L6 18"/>
+            </symbol>
+
+            <symbol id="i-cl" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 2"/>
+            </symbol>
+
+            <symbol id="i-ho" viewBox="0 0 24 24">
+                <path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/>
+            </symbol>
+
+            <symbol id="i-se" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"/>
+                <path d="M21 21l-5-5"/>
+            </symbol>
+
+            <symbol id="i-be" viewBox="0 0 24 24">
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 21h4"/>
+            </symbol>
+
+            <symbol id="i-ca" viewBox="0 0 24 24">
+                <path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"/>
+            </symbol>
+
+            <symbol id="i-ar" viewBox="0 0 24 24">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </symbol>
+
+            <symbol id="i-rs" viewBox="0 0 24 24">
+                <path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="app">
+        <aside class="sb">
+            <div class="lg">
+                <div class="lo">
+                    <svg class="ic">
+                        <use href="#i-sh"/>
+                    </svg>
+                </div>
+
+                SecOps
+            </div>
+
+            <div class="gl">Painel</div>
+
+            <button class="nv on" data-go="ov">
+                <svg class="ic">
+                    <use href="#i-ho"/>
+                </svg>
+                Visão geral
+            </button>
+
+            <div class="gl">Ameaças</div>
+
+            <button class="nv" data-go="or">
+                <svg class="ic">
+                    <use href="#i-gl"/>
+                </svg>
+                Origem dos ataques
+            </button>
+
+            <button class="nv" data-go="mi">
+                <svg class="ic">
+                    <use href="#i-gr"/>
+                </svg>
+                MITRE ATT&amp;CK
+            </button>
+
+            <button class="nv" data-go="al">
+                <svg class="ic">
+                    <use href="#i-sv"/>
+                </svg>
+                Alvos
+            </button>
+
+            <div class="gl">Exposição</div>
+
+            <button class="nv" data-go="vu">
+                <svg class="ic">
+                    <use href="#i-bg"/>
+                </svg>
+                Vulnerabilidades
+            </button>
+
+            <div class="us">
+                <div class="av">W</div>
+
+                <div>
+                    <b>SecOps</b>
+                    <small>Projeto Big Data</small>
+                </div>
+            </div>
+        </aside>
+
+        <main class="mn">
+            <div class="hd">
+                <div>
+                    <h1 id="ttl">Visão geral</h1>
+                    <p id="sub"></p>
+                </div>
+
+                <div class="sp"></div>
+
+                <div class="srch">
+                    <svg class="ic">
+                        <use href="#i-se"/>
+                    </svg>
+
+                    <input
+                        id="q"
+                        placeholder="Buscar país, IP, CVE, regra, host…"
+                        autocomplete="off"
+                    >
+
+                    <kbd>/</kbd>
+
+                    <div id="qr"></div>
+                </div>
+            </div>
+
+            <div class="tb2">
+                <div class="rg">
+                    <svg class="ic">
+                        <use href="#i-ca"/>
+                    </svg>
+
+                    <input
+                        type="date"
+                        id="d0"
+                        min="2026-04-01"
+                        max="2026-09-09"
+                        aria-label="Data inicial"
+                    >
+
+                    <span>até</span>
+
+                    <input
+                        type="date"
+                        id="d1"
+                        min="2026-04-01"
+                        max="2026-09-09"
+                        aria-label="Data final"
+                    >
+                </div>
+
+                <div class="chips" id="pre"></div>
+
+                <span class="rb" id="rb"></span>
+
+                <button
+                    class="rs"
+                    id="rs"
+                    title="Limpar filtro de datas"
+                >
+                    <svg class="ic">
+                        <use href="#i-rs"/>
+                    </svg>
+                    Limpar
+                </button>
+
+                <div class="sp"></div>
+
+                <div
+                    class="tg"
+                    role="group"
+                    aria-label="Filtro da base"
+                >
+                    <button id="b1" class="on">
+                        Base completa
+                    </button>
+
+                    <button id="b2">
+                        Sem o evento 20–21/06
+                    </button>
+                </div>
+            </div>
+
+            <section class="view on" id="v-ov">
+                <div class="s12" id="al"></div>
+
+                <div class="kg s12" id="k"></div>
+
+                <div class="card s8">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-ac"/>
+                        </svg>
+
+                        <h2>Evolução diária de alertas</h2>
+
+                        <span class="hint">
+                            arraste para escolher um período · clique num dia
+                        </span>
+                    </div>
+
+                    <div id="c3"></div>
+                    <div class="lei" id="l3"></div>
+                </div>
+
+                <div class="card s4">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-ba"/>
+                        </svg>
+
+                        <h2>Severidade</h2>
+
+                        <span class="hint">
+                            clique numa fatia ou coluna
+                        </span>
+                    </div>
+
+                    <div id="c2"></div>
+                    <div class="lei" id="l2"></div>
+                </div>
+
+                <div class="card s7">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-li"/>
+                        </svg>
+
+                        <h2>Regras mais disparadas</h2>
+
+                        <span class="hint">
+                            clique numa regra
+                        </span>
+                    </div>
+
+                    <div id="c1"></div>
+                    <div class="lei" id="l1"></div>
+                </div>
+
+                <div class="card s5">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-ba"/>
+                        </svg>
+
+                        <h2>Níveis de severidade</h2>
+
+                        <span class="hint">
+                            clique numa coluna
+                        </span>
+                    </div>
+
+                    <div id="c2b"></div>
+                </div>
+
+                <div class="card s12">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-al"/>
+                        </svg>
+
+                        <h2>Onde agir agora</h2>
+
+                        <span class="hint">
+                            clique para abrir
+                        </span>
+                    </div>
+
+                    <div id="act"></div>
+                </div>
+            </section>
+
+            <section class="view" id="v-or">
+                <div class="card s8">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-gl"/>
+                        </svg>
+
+                        <h2>Mapa de origem</h2>
+
+                        <span class="hint">
+                            clique num país
+                        </span>
+                    </div>
+
+                    <div id="c4"></div>
+                    <div class="lei" id="l4"></div>
+                </div>
+
+                <div class="card s4">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-li"/>
+                        </svg>
+
+                        <h2>Países</h2>
+
+                        <span class="hint">
+                            clique para detalhar
+                        </span>
+                    </div>
+
+                    <div id="c4b"></div>
+                </div>
+
+                <div class="card s12">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-ta"/>
+                        </svg>
+
+                        <h2>Top IPs de origem</h2>
+
+                        <span class="hint">
+                            clique num IP
+                        </span>
+                    </div>
+
+                    <div id="c5"></div>
+                    <div class="lei" id="l5"></div>
+                </div>
+            </section>
+
+            <section class="view" id="v-mi">
+                <div class="card s6">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-gr"/>
+                        </svg>
+
+                        <h2>Táticas</h2>
+
+                        <span class="hint">
+                            clique para ver técnicas
+                        </span>
+                    </div>
+
+                    <div id="c6"></div>
+                    <div class="lei" id="l6"></div>
+                </div>
+
+                <div class="card s6">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-ta"/>
+                        </svg>
+
+                        <h2>Técnicas</h2>
+
+                        <span class="hint">
+                            clique para detalhar
+                        </span>
+                    </div>
+
+                    <div id="c7"></div>
+                    <div class="lei" id="l7"></div>
+                </div>
+            </section>
+
+            <section class="view" id="v-al">
+                <div class="card s6">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-sv"/>
+                        </svg>
+
+                        <h2>Agentes mais afetados</h2>
+
+                        <span class="hint">
+                            clique num host
+                        </span>
+                    </div>
+
+                    <div id="c8"></div>
+                    <div class="lei" id="l8"></div>
+                </div>
+
+                <div class="card s6">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-us"/>
+                        </svg>
+
+                        <h2>Usuários mais visados</h2>
+
+                        <span class="hint">
+                            clique num usuário
+                        </span>
+                    </div>
+
+                    <div id="c9"></div>
+                    <div class="lei" id="l9"></div>
+                </div>
+
+                <div class="card s12">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-mo"/>
+                        </svg>
+
+                        <h2>Eventos Windows (Event ID)</h2>
+
+                        <span class="hint">
+                            clique numa coluna
+                        </span>
+                    </div>
+
+                    <div id="c13"></div>
+                    <div class="lei" id="l13"></div>
+                </div>
+            </section>
+
+            <section class="view" id="v-vu">
+                <div class="card s4">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-al"/>
+                        </svg>
+
+                        <h2>Severidade</h2>
+
+                        <span class="hint">
+                            clique numa fatia
+                        </span>
+                    </div>
+
+                    <div id="c10"></div>
+                    <div class="lei" id="l10"></div>
+                </div>
+
+                <div class="card s4">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-bg"/>
+                        </svg>
+
+                        <h2>CVEs mais frequentes</h2>
+
+                        <span class="hint">
+                            clique num CVE
+                        </span>
+                    </div>
+
+                    <div id="c11"></div>
+                    <div class="lei" id="l11"></div>
+                </div>
+
+                <div class="card s4">
+                    <div class="ch">
+                        <svg class="ic">
+                            <use href="#i-ba"/>
+                        </svg>
+
+                        <h2>Nota CVSS v3</h2>
+
+                        <span class="hint">
+                            clique numa coluna
+                        </span>
+                    </div>
+
+                    <div id="c12"></div>
+                    <div class="lei" id="l12"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="tip"></div>
+
+    <aside id="dr" aria-live="polite"></aside>
+
+    <script src="js/dados.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+```
