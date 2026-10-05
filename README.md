@@ -1,52 +1,38 @@
 # Projeto Big Data & Cibersegurança
 
-Projeto acadêmico sobre análise de eventos de segurança com dados do Wazuh, combinando processamento de dados e visualização em um dashboard SecOps.
+Projeto acadêmico de análise de logs de segurança coletados com Wazuh. O foco do trabalho é organizar e tratar os dados para explorar eventos e identificar informações úteis sobre segurança.
 
-## 1. Visão geral do projeto
+## Etapas do projeto
 
-O objetivo é consolidar eventos de segurança e facilitar a análise de alertas, severidades, origens, vulnerabilidades e técnicas da matriz MITRE ATT&CK. O repositório contém um notebook de engenharia de dados e um dashboard web local.
+- Organização dos logs e criação da base de dados.
+- Tratamento e preparação dos dados para análise.
+- Criação de um dashboard para visualizar alertas e padrões de segurança.
+- Documentação do projeto, incluindo o uso de Big Data e a anonimização dos dados conforme a LGPD.
 
-## 2. Engenharia de dados
+## Equipe
 
-**Responsável:** Ricardo da Silva Lacerda.
+### Haurylan Claan — estrutura do projeto e criação da base de dados
 
-O notebook [`engenharia_dados.ipynb`](engenharia_dados.ipynb) documenta a preparação da base para as análises e dashboards. O processamento registrado inclui:
+Organizou a estrutura do repositório e preparou a base inicial para reunir os logs do projeto em um formato que pudesse ser utilizado nas etapas de tratamento e análise. Essa contribuição estabeleceu os arquivos e os dados de partida para o trabalho da equipe.
 
-- Leitura e consolidação de 178 arquivos CSV.
-- Verificação de linhas, colunas, valores ausentes e tipos de dados.
-- Identificação e remoção de 8.020 registros duplicados.
-- Geração da base tratada.
+### Ricardo da Silva Lacerda — tratamento dos dados
 
-O arquivo `dados_tratados.csv` tem aproximadamente 394 MB e não está versionado neste repositório. A cópia da equipe está disponível [no Google Drive](https://drive.google.com/file/d/112AH7iAGJa-0z9ml6oE0nIFm7U9oNNSu/view?usp=drivesdk) para as análises que precisem da base completa.
+Responsável por preparar os dados para análise. O trabalho inclui ler e consolidar os arquivos de log, verificar a qualidade e os tipos dos dados, identificar registros duplicados e gerar a base tratada para as próximas etapas. O notebook [`engenharia_dados.ipynb`](engenharia_dados.ipynb) registra esse processo.
 
-## 3. Dashboard SecOps
+### Emanuel Bruno — dashboard
 
-O dashboard incluído contém 265.894 alertas de severidade 7–15, de 107 agentes, no período de 01/04/2026 a 09/09/2026, sem duplicatas. Os dados agregados usados pelo painel estão em `dados.js`; esse arquivo não substitui a base CSV completa descrita na seção de engenharia.
+Responsável por transformar os dados preparados em visualizações que facilitem a análise dos eventos de segurança. O dashboard apresenta informações como alertas, severidades, origens e padrões observados, ajudando a equipe a explorar os dados e comunicar os resultados.
 
-### Como executar
+### Eduardo Nicolau — documentação
 
-Abra `index.html` no navegador. O dashboard não exige instalação de dependências e pode funcionar diretamente como arquivo local. Se preferir servir a pasta localmente, execute `python3 -m http.server 8000` e acesse `http://localhost:8000`.
+Responsável por organizar e redigir a documentação e o relatório do projeto. Essa contribuição descreve as etapas realizadas, o uso de Big Data e as ferramentas envolvidas, além de registrar os cuidados com a anonimização dos dados.
 
-### Recursos
+## Arquivos principais
 
-- Filtro por datas, atalhos mensais e seleção de intervalo no gráfico diário.
-- Filtro para excluir os alertas "File system full" de 20–21/06, combinável com o período selecionado.
-- Gráficos, mapa, indicadores e detalhes interativos para regras, países, hosts, usuários, MITRE ATT&CK, CVEs e outros atributos.
-- Busca acionada por `/` para países, IPs, CVEs, regras, hosts, usuários, táticas e técnicas.
+- `engenharia_dados.ipynb`: processamento e análise dos dados.
+- `index.html`, `app.js`, `dados.js` e `style.css`: arquivos do dashboard.
+- `dados_tratados.csv`: base completa tratada, disponibilizada [no Google Drive da equipe](https://drive.google.com/file/d/112AH7iAGJa-0z9ml6oE0nIFm7U9oNNSu/view?usp=drivesdk)e tambem no releases do github, pois seu tamanho é de aproximadamente 394 MB.
 
-Hosts, IPs e usuários estão anonimizados. O mapa representa os países com pontos, sem fronteiras geográficas. Dados de IP de origem e GeoIP estão disponíveis somente para abril.
+## Licença
 
-### Atualizar os dados do painel
-
-Gere `dados.js` no formato `window.FATO = {...}; window.MAPA = {...};`. A lógica de filtros, gráficos e detalhes está em `app.js`; a estrutura da página está em `index.html` e os estilos em `style.css`.
-
-## 4. Arquivos principais
-
-```text
-README.md              documentação do projeto
-engenharia_dados.ipynb processamento e análise da base completa
-index.html             estrutura do dashboard
-app.js                 interações e visualizações
-dados.js               dados agregados do dashboard
-style.css              estilos do dashboard
-```
+O código-fonte deste projeto está sob a licença MIT. A licença não concede direitos sobre bases de dados ou materiais de terceiros; consulte os termos aplicáveis a esses materiais.
