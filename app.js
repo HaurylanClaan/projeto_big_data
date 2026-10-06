@@ -8,7 +8,6 @@ const YEAR = START.getFullYear();
 
 const EMPTY = '<div class="vz">Sem dados no período selecionado.</div>';
 
-let M = 'all';
 let D0 = 0;
 let D1 = ND - 1;
 let ROWS = [];
@@ -180,48 +179,44 @@ const fTec = i => PR(i).map(p => p[1]);
 // ============================================================
 
 function pre() {
-    for (const m of ['all', 'ex']) {
-        const t = new Array(ND).fill(0);
-        const h = t.slice();
-        const g = t.slice();
+    const t = new Array(ND).fill(0);
+    const h = t.slice();
+    const g = t.slice();
 
-        const as = Array.from(
-            { length: ND },
-            () => new Set()
-        );
+    const as = Array.from(
+        { length: ND },
+        () => new Set()
+    );
 
-        for (let i = 0; i < N; i++) {
-            if (m == 'ex' && F.r[i] == FSF) continue;
+    for (let i = 0; i < N; i++) {
+        const d = F.d[i];
+        const n = F.n[i];
 
-            const d = F.d[i];
-            const n = F.n[i];
+        t[d] += n;
 
-            t[d] += n;
-
-            if (F.lv[i] >= 12) {
-                h[d] += n;
-            }
-
-            if (F.c[i]) {
-                g[d] += n;
-            }
-
-            as[d].add(F.a[i]);
+        if (F.lv[i] >= 12) {
+            h[d] += n;
         }
 
-        SER[m] = {
-            t,
-            h,
-            g,
-            a: as.map(s => s.size)
-        };
+        if (F.c[i]) {
+            g[d] += n;
+        }
+
+        as[d].add(F.a[i]);
     }
+
+    SER.all = {
+        t,
+        h,
+        g,
+        a: as.map(s => s.size)
+    };
 
     PRES = SER.all.t.map(v => v > 0);
 }
 
 const ser = key =>
-    SER[M][key].map((v, i) =>
+    SER.all[key].map((v, i) =>
         PRES[i]
             ? v
             : null
@@ -242,8 +237,7 @@ function compute() {
 
         if (
             d < D0 ||
-            d > D1 ||
-            (M == 'ex' && F.r[i] == FSF)
+            d > D1
         ) {
             continue;
         }
@@ -1256,7 +1250,6 @@ const top1 = (r, i = 0) =>
 function render() {
     compute();
 
-    const e = M == 'ex';
     const n = ST.n;
     const full =
         D0 == 0 &&
@@ -1275,26 +1268,6 @@ function render() {
         `<b>${D1 - D0 + 1}</b> dias · <b>${ST.days}</b> com dados`;
 
     pre_chips();
-
-    $('b1').className =
-        e
-            ? ''
-            : 'on';
-
-    $('b2').className =
-        e
-            ? 'on'
-            : '';
-
-    const storm =
-        !e &&
-        D0 <= 81 &&
-        D1 >= 80;
-
-    $('al').innerHTML =
-        storm
-            ? `<div class="al">${ico('al')}<div><b>Anomalia na base:</b> 162.390 alertas "File system full", de um único host em 20 e 21/06, são 61% de tudo. Use o filtro "Sem o evento" ou escolha outro período para comparar.</div></div>`
-            : '';
 
     const hosts = agg(
         fAgent,
@@ -1493,7 +1466,7 @@ function render() {
     L(
         'l1',
         n
-            ? `<b>${r0[0]}</b> lidera, com <b>${pc(r0[1], n)}</b> dos alertas${e ? '' : ' (inclui o evento de 20–21/06, se estiver no período)'}.`
+            ? `<b>${r0[0]}</b> lidera, com <b>${pc(r0[1], n)}</b> dos alertas (incluindo o evento de 20–21/06, se estiver no período).`
             : ''
     );
 
@@ -2281,17 +2254,6 @@ $('d1').onchange = () => {
 
 $('rs').onclick =
     () => setRange(0, ND - 1);
-
-$('b1').onclick = () => {
-    M = 'all';
-    render();
-};
-
-$('b2').onclick = () => {
-    M = 'ex';
-    render();
-};
-
 
 // ============================================================
 // INICIALIZAÇÃO
