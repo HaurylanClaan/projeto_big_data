@@ -2,6 +2,10 @@
 
 Projeto acadêmico de análise de logs de segurança coletados com Wazuh. O foco do trabalho é organizar e tratar os dados para explorar eventos e identificar informações úteis sobre segurança.
 
+## Projeto online
+
+- Dashboard publicado: [Projeto Big Data & Cibersegurança](https://haurylanclaan.github.io/projeto_big_data/#ov)
+
 ## Etapas do projeto
 
 - Organização dos logs e criação da base de dados anonimizada.
