@@ -395,6 +395,7 @@ function hb(rows, col, o = {}) {
 }
 
 
+
 // ============================================================
 // GRÁFICOS — COLUNAS
 // ============================================================
@@ -553,7 +554,6 @@ function dn2(rows, cols, kind, ctr, sub) {
     );
 
     let off = 0;
-
     let o =
         '<div class="dg">' +
         '<svg viewBox="0 0 170 170">' +
@@ -1968,8 +1968,7 @@ document.addEventListener('click', ev => {
     }
 
     if (
-        !ev.target.closest('#dr') &&
-        !ev.target.closest('.srch')
+        !ev.target.closest('#dr')
     ) {
         close_();
     }
@@ -1998,17 +1997,7 @@ document.addEventListener('keydown', ev => {
             );
     }
 
-    if (
-        ev.key == '/' &&
-        document.activeElement.tagName != 'INPUT'
-    ) {
-        ev.preventDefault();
-        $('q').focus();
-    }
-
     if (ev.key == 'Escape') {
-        $('qr').style.display = 'none';
-        $('q').blur();
         close_();
     }
 });
@@ -2058,170 +2047,6 @@ document.addEventListener('mousemove', ev => {
 
 
 // ============================================================
-// BUSCA
-// ============================================================
-
-const nz = s =>
-    s
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(
-            /[\u0300-\u036f]/g,
-            ''
-        );
-
-const tecs = [
-    ...new Set(
-        DC.mitre
-            .flat()
-            .map(p => p[1])
-    )
-];
-
-const tacs = [
-    ...new Set(
-        DC.mitre
-            .flat()
-            .map(p => p[0])
-    )
-];
-
-const IDX = [
-    ...DC.country
-        .slice(1)
-        .map(c => [
-            pt(c),
-            'país',
-            'pais',
-            c
-        ]),
-
-    ...DC.cve
-        .slice(1)
-        .map(c => [
-            c,
-            'CVE',
-            'cve',
-            c
-        ]),
-
-    ...DC.ip
-        .slice(1)
-        .map(c => [
-            c.slice(3, 11),
-            'IP',
-            'ip',
-            c
-        ]),
-
-    ...DC.agent
-        .map(h => [
-            h
-                .replace('HOST_', 'host·')
-                .slice(0, 13),
-            'agente',
-            'host',
-            h
-        ]),
-
-    ...DC.rule
-        .map(r => [
-            r,
-            'regra',
-            'regra',
-            r
-        ]),
-
-    ...tacs
-        .map(t => [
-            t,
-            'tática',
-            'tat',
-            t
-        ]),
-
-    ...tecs
-        .map(t => [
-            t,
-            'técnica',
-            'tec',
-            t
-        ]),
-
-    ...DC.user
-        .slice(1)
-        .map(u => [
-            u
-                .replace('USER_', 'user·')
-                .slice(0, 13),
-            'usuário',
-            'user',
-            u
-        ])
-];
-
-$('q').addEventListener(
-    'input',
-    () => {
-        const q =
-            nz(
-                $('q')
-                    .value
-                    .trim()
-            );
-
-        if (!q) {
-            $('qr').style.display = 'none';
-            return;
-        }
-
-        const r =
-            IDX
-                .filter(
-                    x =>
-                        nz(x[0])
-                            .includes(q)
-                )
-                .slice(0, 8);
-
-        $('qr').innerHTML =
-            r
-                .map(
-                    x =>
-                        `<button data-i="${IDX.indexOf(x)}">${cut(x[0], 34)}<small>${x[1]}</small></button>`
-                )
-                .join('') ||
-            '<button>Nada encontrado</button>';
-
-        $('qr').style.display = 'block';
-    }
-);
-
-$('qr').addEventListener(
-    'click',
-    ev => {
-        const b =
-            ev.target.closest('[data-i]');
-
-        if (!b) {
-            return;
-        }
-
-        const x =
-            IDX[+b.dataset.i];
-
-        $('qr').style.display = 'none';
-        $('q').value = '';
-
-        open_(
-            x[2],
-            x[3]
-        );
-    }
-);
-
-
-// ============================================================
 // FILTRO POR DATA
 // ============================================================
 
@@ -2247,22 +2072,11 @@ $('d1').onchange = () => {
     }
 };
 
-
-// ============================================================
-// CONTROLES PRINCIPAIS
-// ============================================================
-
 $('rs').onclick =
     () => setRange(0, ND - 1);
 
-// ============================================================
-// INICIALIZAÇÃO
-// ============================================================
-
 pre();
-
 brush();
-
 render();
 
 const h0 =
@@ -2274,3 +2088,4 @@ go(
         ? h0
         : 'ov'
 );
+
