@@ -3,6 +3,8 @@ const DC = F.dic;
 const MAP = window.MAPA;
 const ND = F.nd;
 const N = F.n.length;
+const START = new Date(`${F.start}T00:00:00`);
+const YEAR = START.getFullYear();
 
 const EMPTY = '<div class="vz">Sem dados no período selecionado.</div>';
 
@@ -100,7 +102,11 @@ const GR2 = '#34d399';
 
 const pad = n => String(n).padStart(2, '0');
 
-const dd = i => new Date(2026, 3, 1 + i);
+const dd = i => new Date(
+    YEAR,
+    START.getMonth(),
+    START.getDate() + i
+);
 
 const dstr = i =>
     pad(dd(i).getDate()) +
@@ -108,7 +114,7 @@ const dstr = i =>
     pad(dd(i).getMonth() + 1);
 
 const iso = i =>
-    `2026-${pad(dd(i).getMonth() + 1)}-${pad(dd(i).getDate())}`;
+    `${YEAR}-${pad(dd(i).getMonth() + 1)}-${pad(dd(i).getDate())}`;
 
 const isoDay = s =>
     Math.round(
@@ -118,7 +124,7 @@ const isoDay = s =>
                 +s.slice(5, 7) - 1,
                 +s.slice(8, 10)
             ) -
-            Date.UTC(2026, 3, 1)
+            Date.UTC(YEAR, START.getMonth(), START.getDate())
         ) / 864e5
     );
 
@@ -127,8 +133,8 @@ const strDay = s => {
 
     return Math.round(
         (
-            Date.UTC(2026, +b - 1, +a) -
-            Date.UTC(2026, 3, 1)
+            Date.UTC(YEAR, +b - 1, +a) -
+            Date.UTC(YEAR, START.getMonth(), START.getDate())
         ) / 864e5
     );
 };
@@ -141,7 +147,9 @@ const ico = n =>
 // CONFIGURAÇÕES DOS DADOS
 // ============================================================
 
-const FSF = DC.rule.indexOf('File system full');
+const FSF = DC.rule.findIndex(rule =>
+    rule.startsWith('File system full')
+);
 
 const GR = {
     Baixa: [7, 8],
@@ -678,7 +686,7 @@ function ln(s) {
     s.forEach((v, i) => {
         if (v != null) {
             o +=
-                `<g data-k="dia|${i}" data-t="${dstr(i)}/2026|${f(v)} alertas|clique: regras do dia · arraste: escolher período">` +
+                `<g data-k="dia|${i}" data-t="${dstr(i)}/${YEAR}|${f(v)} alertas|clique: regras do dia · arraste: escolher período">` +
                 `<rect class="hit" x="${lx(i) - bw / 2}" y="0" width="${bw}" height="${LH - LB}"/>` +
                 `</g>`;
         }
@@ -903,7 +911,7 @@ const SPC = {
     },
 
     dia: {
-        t: k => dstr(dayN(k)) + '/2026',
+        t: k => dstr(dayN(k)) + '/' + YEAR,
         ic: 'cl',
         p: k => i => F.d[i] == dayN(k),
         s: [
@@ -1256,6 +1264,8 @@ function render() {
 
     $('d0').value = iso(D0);
     $('d1').value = iso(D1);
+    $('d0').min = $('d1').min = iso(0);
+    $('d0').max = $('d1').max = iso(ND - 1);
 
     $('rs').className =
         'rs' +
