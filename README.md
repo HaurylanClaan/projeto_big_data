@@ -28,18 +28,24 @@ Responsável por transformar os dados preparados em visualizações que facilite
 Responsável por organizar e redigir a documentação e o relatório do projeto. Essa contribuição descreve as etapas realizadas, o uso de Big Data e as ferramentas envolvidas, além de registrar os cuidados com a anonimização dos dados.
 
 ## Fluxo dos dados
-0.0 Logs do sistema em funcionamento real sao extraidos e anonimizados em uma base em csv.
-1. Os arquivos CSV com os logs são reunidos pelo notebook [`engenharia_dados.ipynb`](engenharia_dados.ipynb).
-2. O notebook combina os arquivos, verifica os dados, remove duplicatas e salva a base tratada como `base_tratada.csv` no Google Drive.
-3. O dashboard é carregado pelos arquivos `index.html`, `app.js`, `style.css` e `dados.js`. Ele usa os dados `FATO` e `MAPA` definidos em `dados.js`.
 
-Atualmente, o notebook não gera `dados.js`, e o dashboard não lê o CSV diretamente do Google Drive. Portanto, as duas partes ainda não estão integradas automaticamente. Para atualizar os dados do dashboard, é necessário converter a base tratada para o formato esperado por `dados.js` e publicar o arquivo atualizado no repositório. O GitHub Pages serve os arquivos publicados no repositório e não sincroniza automaticamente as alterações feitas no Drive.
+1. Os logs são anonimizados e disponibilizados em arquivos CSV.
+2. O notebook [`engenharia_dados.ipynb`](engenharia_dados.ipynb) baixa o arquivo original `data_base.rar` do [Release v1.0-dataset](https://github.com/HaurylanClaan/projeto_big_data/releases/download/v1.0-dataset/data_base.rar), extrai os 178 CSVs, combina os dados, remove duplicatas e colunas com excesso de valores vazios.
+3. O notebook salva a saída como `/content/base_tratada.csv` no ambiente do Colab.
+4. O dashboard carrega os dados compactados de `dados.js`. Esse arquivo foi atualizado a partir da base tratada publicada no [Release dataset-tratado](https://github.com/HaurylanClaan/projeto_big_data/releases/download/dataset-tratado/base_tratada.csv).
+
+O notebook ainda contém uma chamada para montar o Google Drive, mas os arquivos de entrada vêm do GitHub Releases e a saída é salva em `/content`. O dashboard não baixa o CSV: para atualizar os dados publicados no site, é necessário gerar e publicar uma nova versão de `dados.js`.
+
+## Dashboard
+
+O painel apresenta alertas por período, severidade, regra, país de origem, agente, usuário, MITRE ATT&CK, Event ID e vulnerabilidade. É possível filtrar por datas, usar atalhos mensais e abrir detalhes clicando nos gráficos e indicadores. A busca e o filtro para excluir o evento de 20–21/06 foram removidos; o dashboard usa a base completa.
 
 ## Arquivos principais
 
 - `engenharia_dados.ipynb`: processamento e análise dos dados.
 - `index.html`, `app.js`, `dados.js` e `style.css`: arquivos do dashboard.
-- `base_tratada.csv`: base tratada, salva pelo notebook no Google Drive. A base compartilhada pela equipe, com aproximadamente 394 MB, também está [disponível no Google Drive](https://drive.google.com/file/d/112AH7iAGJa-0z9ml6oE0nIFm7U9oNNSu/view?usp=drivesdk).
+- `data_base.rar`: CSVs originais publicados no Release `v1.0-dataset`.
+- `base_tratada.csv`: base tratada publicada no Release `dataset-tratado`; o notebook também gera uma cópia em `/content`.
 
 ## Licença
 
